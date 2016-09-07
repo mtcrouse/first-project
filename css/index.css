@@ -1,37 +1,16 @@
-#search-again {
-  display: none;
+header {
+  background-image: url("../pictures/sedona-sunset.jpg");
+  justify-content: center;
+  background-position: cover;
+  padding: 180px;
 }
 
 .menu-item {
   margin-right: 50px;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  bottom:0px;
-  height: 100%;
-  width:100%;
-  left: 0px;
-  top: 60px;
-  position: absolute;
-  right: 0px;
-}
-
-#adv-search-heading {
-  padding-bottom: 50px;
-}
-
 html {
   font-family: 'Lora', serif;
-}
-
-body {
-  height: 100%;
 }
 
 footer {
