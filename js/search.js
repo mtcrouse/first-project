@@ -15,6 +15,10 @@ $(document).ready(function() {
       $('.button-collapse').sideNav('show');
   });
 
+  $('#adv-search-button').click(function() {
+      $('.button-collapse').sideNav('hide');
+  });
+
 
   // Initialize an empty array to keep track of all the markers
   let markers = [];
@@ -27,6 +31,10 @@ $(document).ready(function() {
     hideHikes();
 
     markers = [];
+
+    let hikeInfo = new google.maps.InfoWindow({
+      content: ''
+    });
 
     let newLimit = '10',
         newRadius = '25',
@@ -72,16 +80,11 @@ $(document).ready(function() {
           title: $inputText,
         });
 
-        markers.push(newMarker);
+        let hikeInfo = new google.maps.InfoWindow({
+          content: null
+        });
 
-        let newInfoWindow = new google.maps.InfoWindow({
-          content: $inputText
-        });
-        // Create an EVENT LISTENER so that the infowindow opens when
-        // the marker is clicked!
-        newMarker.addListener('click', function() {
-          newInfoWindow.open(map, newMarker);
-        });
+        markers.push(newMarker);
 
         let newTrailsURL = makeTrailsURL(newLat, newLng, newLimit, newTrail, newCity, newState, newRadius);
 
@@ -95,10 +98,8 @@ $(document).ready(function() {
             success: function(data) {
               let hikes = data['places'];
               for (let hike of hikes) {
-                console.log(hike);
                 let hikeMarker = new google.maps.Marker({
                   position: {lat: hike['lat'], lng: hike['lon']},
-                  // map: map,
                   title: hike['name'],
                   animation: google.maps.Animation.DROP,
                   icon: 'tree.png'
@@ -109,11 +110,9 @@ $(document).ready(function() {
                   hike['activities'][0]['name'] + '</h6>' + '<p>' +
                   description + '</p>' +
                   moreInfoLink + '</div';
-                let hikeInfo = new google.maps.InfoWindow({
-                  content: infoWindowContent
-                });
                 markers.push(hikeMarker);
                 hikeMarker.addListener('click', function() {
+                  hikeInfo.setContent(infoWindowContent);
                   hikeInfo.open(map, hikeMarker);
                 });
               };
@@ -173,15 +172,5 @@ $(document).ready(function() {
       markers[i].setMap(null);
     }
   }
-
-  // $('#search-again').click(function(event) {
-  //   $('.hike-search').fadeIn();
-  //
-  //   $('#search-again').fadeOut();
-  //
-  //   hideHikes();
-  //
-  //   markers = [];
-  // });
 
 });
