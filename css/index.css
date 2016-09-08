@@ -1,20 +1,18 @@
-header {
-  background-image: url("../pictures/mountains.jpg");
-  background-repeat: no-repeat;
-  justify-content: center;
-  background-position: center;
-  height: 80%;
-}
-
-.menu-item {
-  margin-right: 50px;
-}
+/*This is the css stylesheet for the index html file*/
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Lora', serif;
+  font-size: 100%;
+}
+
+header {
+  background-image: url("../pictures/mountains.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 80%;
 }
 
 footer {
@@ -22,7 +20,7 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 10%;
+  /*height: 10%;*/
 }
 
 nav {
@@ -33,11 +31,8 @@ ul li {
   display: inline;
   padding-right: 20px;
   padding-left: 20px;
-  padding-top: 0;
-  margin-bottom: 50px;
 }
 
-h5 {
-  padding: 0;
-  margin: 0;
+.menu-item {
+  margin-right: 5%;
 }

@@ -19,10 +19,14 @@ nav {
 
 ul li {
   display: inline;
-  padding-right: 20px;
-  padding-left: 20px;
   padding-top: 0;
-  margin-bottom: 50px;
+  padding-bottom: 0;
+  cursor: pointer;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
 }
 
 h5 {
@@ -31,7 +35,8 @@ h5 {
 }
 
 .menu-item {
-  margin-right: 50px;
+  margin-right: 5%;
+  margin-left: 5%;
 }
 
 #map {
@@ -42,6 +47,17 @@ h5 {
   position: absolute;
 }
 
+#adv-search {
+  font-size: 1.1em;
+  line-height: 25px;
+  cursor: pointer;
+}
+
 #adv-search-heading {
+  padding-top: 25px;
   padding-bottom: 50px;
+}
+
+#adv-search-button-div {
+  margin-top: 50px;
 }

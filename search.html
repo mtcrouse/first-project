@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Search for a hike!</title>
+    <title>Search | Hike Finder</title>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
@@ -47,9 +47,8 @@
           map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40, lng: -90},
             zoom: 4,
-            mapTypeControlOptions: {
-              mapTypeIds: ['roadmap']
-            },
+            disableDefaultUI: true,
+            zoomControl: true,
             styles: [
                 {
                   featureType: 'all',
@@ -106,7 +105,7 @@
                 <label for="sideNavRadius">radius</label>
               </div>
 
-              <div class="center">
+              <div id="adv-search-button-div" class="center">
                 <button id="adv-search-button" class="btn green center">search</button>
               </div>
 
@@ -119,14 +118,28 @@
 
     </main>
 
-    <footer class="page-footer green darken-1 white-text">
+    <!-- <footer class="page-footer green darken-1 white-text flow-text">
       <h5 class="center"><a href="index.html" class="white-text">hike finder</a></h5>
       <ul class="center">
         <li><a href="index.html" class="white-text">home</a></li>
         <li><a href="search.html" class="white-text">find a hike</a></li>
         <li><a href="#" class="white-text">about</a></li>
-        <li id="adv-search">advanced search</li>
+
       </ul>
+    </footer> -->
+    <footer class="page-footer green darken-1 white-text">
+      <div class="row">
+        <div class="col s6">
+            <h5 class="left-align menu-item">
+              <a href="index.html" class="white-text">hike finder</a>
+            </h5>
+        </div>
+        <div class="col s6">
+            <h5 class="right-align menu-item" id="adv-search">
+              advanced search
+            </h5>
+        </div>
+      </div>
     </footer>
 
     <!--Import jQuery before materialize.js-->
