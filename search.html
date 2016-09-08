@@ -23,7 +23,7 @@
       <div class="nav-wrapper green darken-1">
         <form class="hike-search">
           <div class="input-field">
-            <input id="search-bar" class="addressInput hike-search-input" type="search" placeholder="enter an address, city, state, or landmark and press enter" required>
+            <input id="search-bar" class="addressInput hike-search-input" type="search" placeholder="enter an address or landmark and press enter" required>
             <label for="search"><i class="material-icons">search</i></label>
           </div>
 
@@ -31,12 +31,6 @@
         <a href="index.html" class="right brand-logo menu-item">hike finder</a> \
       </div>
     </nav>
-
-  <!-- Header -->
-  <header>
-
-  </header>
-  <!-- End header -->
 
   <main>
 
@@ -53,6 +47,9 @@
           map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40, lng: -90},
             zoom: 4,
+            mapTypeControlOptions: {
+              mapTypeIds: ['roadmap']
+            },
             styles: [
                 {
                   featureType: 'all',
@@ -87,16 +84,10 @@
         };
         </script>
 
-        <!-- <ul id="slide-out" class="side-nav fixed">
-          <li><a href="#!">First Sidebar Link</a></li>
-          <li><a href="#!">Second Sidebar Link</a></li>
-        </ul>
-        <a href="#" data-activates="slide-out" class="button-collapse"></a> -->
-
         <ul id="slide-out" class="side-nav">
           <div class="container">
             <form class="hike-search">
-              <h4 class="center" id="adv-search-heading">advanced search</h4>
+              <h4 class="center green-text" id="adv-search-heading">advanced search</h4>
 
               <div class="input-field">
                 <input class="hike-search-input" type='text' id="sideNavAddress" required />
@@ -122,14 +113,9 @@
             </form>
           </div>
         </ul>
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+        <a href="#" data-activates="slide-out" class="button-collapse"></a>
 
       </div>
-      <!-- <div id="search-again" class="row">
-        <div class="col s4 offset-s4">
-          <button class="waves-effect waves-light btn-large green center">SEARCH AGAIN</button>
-        </div>
-      </div> -->
 
     </main>
 
@@ -148,7 +134,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFp1aNKLlFLi4bxc2cTYjq1XvBisXNo3s&v=3&callback=initMap"
     async defer></script>
-    <!-- <script type="text/javascript" src="js/master.js"></script> -->
     <script type="text/javascript" src="js/search.js"></script>
   </body>
 </html>

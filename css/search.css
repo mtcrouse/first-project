@@ -1,37 +1,8 @@
-#search-again {
-  display: none;
-}
-
-.menu-item {
-  margin-right: 50px;
-}
-
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-#map {
-  bottom:0px;
-  height: 100%;
-  width:100%;
-  left: 0px;
-  top: 60px;
-  position: absolute;
-  right: 0px;
-}
-
-#adv-search-heading {
-  padding-bottom: 50px;
-}
-
-html {
   font-family: 'Lora', serif;
-}
-
-body {
-  height: 100%;
 }
 
 footer {
@@ -39,6 +10,11 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+  height: 10%;
+}
+
+nav {
+  height: 10%;
 }
 
 ul li {
@@ -52,4 +28,20 @@ ul li {
 h5 {
   padding: 0;
   margin: 0;
+}
+
+.menu-item {
+  margin-right: 50px;
+}
+
+#map {
+  height: 80%;
+  width:100%;
+  top: 10%;
+  bottom: 10%;
+  position: absolute;
+}
+
+#adv-search-heading {
+  padding-bottom: 50px;
 }
