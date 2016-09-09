@@ -9,7 +9,7 @@ html, body {
 }
 
 body {
-  background-image: url("../pictures/newleaves.jpg");
+  background-image: url("../pictures/yellowleaf.png");
   background-repeat: no-repeat;
   background-position: center;
   height: 80%;
@@ -43,4 +43,13 @@ nav {
 
 #clear-saved-hikes {
   margin-bottom: 150px;
+}
+
+.checkmark {
+  color: white;
+}
+
+.completed {
+  background-color: #43a047;
+  color: white;
 }

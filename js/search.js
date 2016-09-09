@@ -33,7 +33,6 @@ $(document).ready(function() {
 
 
   if (localStorage.getItem('newVisitor') === null) {
-    console.log('newVisitor');
 
     localStorage.setItem('newVisitor', 'false');
 
@@ -73,8 +72,6 @@ $(document).ready(function() {
     delayedToast2();
     delayedToast3();
     delayedToast4();
-  } else {
-    console.log('Welcome back!');
   }
 
   if (localStorage.getItem('savedHikes') === null) {
@@ -165,7 +162,6 @@ $(document).ready(function() {
             success: function(data) {
               let hikes = data['places'];
               for (let hike of hikes) {
-                console.log(hike);
                 let hikeMarker = new google.maps.Marker({
                   position: {lat: hike['lat'], lng: hike['lon']},
                   title: hike['name'],
@@ -191,17 +187,17 @@ $(document).ready(function() {
                     Materialize.toast('Your hike was saved!', 2000);
 
                     let hikeCount = localStorage.getItem('savedHikeCount');
-                    console.log(hikeCount);
+
                     let hikeObj = {
                       [hikeCount]: {
                         name: hike['name'],
                         info: description,
                         link: moreInfoLink,
                         city: hike['city'],
-                        state: hike['state']
+                        state: hike['state'],
+                        id: hike['unique_id']
                       }
                     }
-                    console.log(hikeObj);
 
                     let storedHikes = JSON.parse(localStorage.getItem('savedHikes'));
                     storedHikes[hikeCount] = hikeObj[hikeCount];
