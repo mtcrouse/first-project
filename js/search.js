@@ -16,7 +16,9 @@ $(document).ready(function() {
   });
 
   $('#adv-search-button').click(function() {
-      $('.button-collapse').sideNav('hide');
+      if ($('#sideNavAddress').val() !== '') {
+        $('.button-collapse').sideNav('hide');
+      }
   });
 
   $('#search-bar').blur(function() {
@@ -31,8 +33,46 @@ $(document).ready(function() {
 
 
   if (localStorage.getItem('newVisitor') === null) {
-    console.log('nothing in local storage');
+    console.log('newVisitor');
+
     localStorage.setItem('newVisitor', 'false');
+
+    function delayedToast() {
+      window.setTimeout(searchToast, 2000);
+    }
+
+    function searchToast() {
+      Materialize.toast('Enter an address, city, state, or landmark in the search bar at the top, and then press enter', 4000, 'rounded');
+    }
+
+    function delayedToast2() {
+      window.setTimeout(searchToast2, 6500);
+    }
+
+    function searchToast2() {
+      Materialize.toast('Click "Advanced Search" at the bottom right if you want more search options', 4000, 'rounded');
+    }
+
+    function delayedToast3() {
+      window.setTimeout(searchToast3, 11000);
+    }
+
+    function searchToast3() {
+      Materialize.toast('After you search, click on the trees to explore and save different hikes', 4000, 'rounded');
+    }
+
+    function delayedToast4() {
+      window.setTimeout(searchToast4, 15500);
+    }
+
+    function searchToast4() {
+      Materialize.toast('Click "Your Hikes" at the bottom right to see the hikes you\'ve picked out', 4000, 'rounded');
+    }
+
+    delayedToast();
+    delayedToast2();
+    delayedToast3();
+    delayedToast4();
   } else {
     console.log('Welcome back!');
   }

@@ -9,10 +9,11 @@ html, body {
 }
 
 header {
-  background-image: url("../pictures/mountains.jpg");
+  background-image: url("../pictures/greenline.jpg");
   background-repeat: no-repeat;
   background-position: center;
   height: 80%;
+  width: 100%;
 }
 
 footer {
@@ -36,3 +37,12 @@ ul li {
 .menu-item {
   margin-right: 5%;
 }
+
+#main-button {
+  padding-top: 200px;
+  margin-top: 100px;
+}
+
+/*#text-column {
+  border: 5px double green;
+}*/

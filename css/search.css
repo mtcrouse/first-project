@@ -39,6 +39,10 @@ h5 {
   margin-left: 5%;
 }
 
+.menu-item-left {
+  margin-left: 5%;
+}
+
 .save-hike {
   color: #039be5;
   cursor: pointer;
@@ -75,9 +79,9 @@ h5 {
 
 #toast-container {
   bottom: auto !important;
-  left: auto !important;
-  top: 10%;
-  right: 45%;
+  left: 5%;
+  top: auto !important;
+  right: auto !important;
 }
 
 /* Make the placeholder text white */
