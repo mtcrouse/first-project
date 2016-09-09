@@ -19,6 +19,31 @@ $(document).ready(function() {
       $('.button-collapse').sideNav('hide');
   });
 
+  $('#search-bar').blur(function() {
+    $('#search-bar').css('background-color', '#43a047');
+  });
+
+  $('#search-bar').focus(function() {
+    $('#search-bar').css('background-color', '#1b5e20');
+    $('#search-bar').css('color', 'white');
+    $('#search-icon').css('color', 'white');
+  });
+
+
+  if (localStorage.getItem('newVisitor') === null) {
+    console.log('nothing in local storage');
+    localStorage.setItem('newVisitor', 'false');
+  } else {
+    console.log('Welcome back!');
+  }
+
+  if (localStorage.getItem('savedHikes') === null) {
+    localStorage.setItem('savedHikes', '{}');
+  }
+
+  if (localStorage.getItem('savedHikeCount') === null) {
+    localStorage.setItem('savedHikeCount', '0');
+  }
 
   // Initialize an empty array to keep track of all the markers
   let markers = [];
@@ -27,6 +52,8 @@ $(document).ready(function() {
   $('.hike-search').submit(function(event) {
 
     event.preventDefault();
+
+    $('#search-bar').blur();
 
     hideHikes();
 
@@ -98,6 +125,7 @@ $(document).ready(function() {
             success: function(data) {
               let hikes = data['places'];
               for (let hike of hikes) {
+                console.log(hike);
                 let hikeMarker = new google.maps.Marker({
                   position: {lat: hike['lat'], lng: hike['lon']},
                   title: hike['name'],
@@ -105,23 +133,52 @@ $(document).ready(function() {
                   icon: 'tree.png'
                 });
                 let description = hike['activities'][0]['description'].replace(/&lt;br \/&gt;<br \/>/g, '<br><br>');
-                let moreInfoLink = `<a href=${hike['activities'][0]['url']}>Click here for more information</a>`
+                let moreInfoLink = `<a href=${hike['activities'][0]['url']} target='_blank'>Click here for more information</a>`
+                let saveHike = '<p class="save-hike"> Click here to save this hike to your hikes </p>'
                 let infoWindowContent = '<div class="info-window-content"><h6>' +
                   hike['activities'][0]['name'] + '</h6>' + '<p>' +
                   description + '</p>' +
-                  moreInfoLink + '</div';
+                  moreInfoLink + saveHike + '</div>';
                 markers.push(hikeMarker);
+
                 hikeMarker.addListener('click', function() {
                   hikeInfo.setContent(infoWindowContent);
                   hikeInfo.open(map, hikeMarker);
+
+                  $('.save-hike').click(function(event) {
+                    $(event.target).off();
+
+                    Materialize.toast('Your hike was saved!', 2000);
+
+                    let hikeCount = localStorage.getItem('savedHikeCount');
+                    console.log(hikeCount);
+                    let hikeObj = {
+                      [hikeCount]: {
+                        name: hike['name'],
+                        info: description,
+                        link: moreInfoLink,
+                        city: hike['city'],
+                        state: hike['state']
+                      }
+                    }
+                    console.log(hikeObj);
+
+                    let storedHikes = JSON.parse(localStorage.getItem('savedHikes'));
+                    storedHikes[hikeCount] = hikeObj[hikeCount];
+
+                    localStorage.setItem('savedHikeCount', Number(hikeCount) + 1);
+
+                    let jsonHike = JSON.stringify(storedHikes);
+
+                    localStorage.setItem('savedHikes', jsonHike);
+                  });
+
                 });
               };
               showHikes();
             }
         });
-
     });
-
   });
 
   function makeTrailsURL(latitude, longitude, limit, trailName, city, state, radius) {

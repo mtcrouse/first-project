@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Hike Finder</title>
+    <title>Your Hikes | Hike Finder</title>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <!-- Import Lora -->
@@ -14,7 +14,7 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Link to css file -->
-    <link rel="stylesheet" href="css/index.css" media="screen">
+    <link rel="stylesheet" href="css/yourhikes.css" media="screen">
   </head>
 
 
@@ -27,40 +27,37 @@
       </div>
     </nav>
 
-    <!-- Header -->
-    <header class="valign-wrapper">
-
-      <div class="row">
-        <div class="col s12 valign">
-          <!-- <h1 class="green-text" id="slogan">
-           go outside
-          </h1> -->
-          <div class="center" id="main-button">
-            <a href="search.html" class="waves-effect waves-light btn green center">find a hike</a>
-          </div>
-        </div>
-      </div>
-
-    </header>
-    <!-- End header -->
-
     <main>
 
       <!-- Start main container -->
-      <!-- <div class="container"> -->
+      <div id="main-container" class="container">
+        <div class="row">
+          <div class="col s12 center">
+            <p id="no-hikes-message"> you haven't added any hikes! head to the
+            <a href="search.html">search</a> page to add your favorite hikes to
+            this page.</p>
+          </div>
+        </div>
+        <div class="row hikes-pop-out-div">
+          <h3 class="center">your hikes</h3>
+          <ul id="hikes-pop-out" class="collapsible popout" data-collapsible="accordion">
 
-
+          </ul>
+        </div>
+        <div class="center hikes-pop-out-div">
+          <button id="clear-saved-hikes" class="btn green center">reset saved hikes</button>
+        </div>
       <!-- End of main container -->
-      <!-- </div> -->
+      </div>
     </main>
 
     <footer class="page-footer green darken-1 white-text">
       <div class="row">
         <div class="col s12">
             <ul class="center-align">
-              <li><a href="index.html" class="white-text">home</a></li>
-              <li><a href="search.html" class="white-text">search</a></li>
-              <li><a href="yourhikes.html" class="white-text">your hikes</a></li>
+              <li class="footer-item"><a href="index.html" class="white-text">home</a></li>
+              <li class="footer-item"><a href="search.html" class="white-text">search</a></li>
+              <li class="footer-item"><a href="yourhikes.html" class="white-text">your hikes</a></li>
             </ul>
         </div>
       </div>
@@ -69,6 +66,6 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/yourhikes.js"></script>
   </body>
 </html>

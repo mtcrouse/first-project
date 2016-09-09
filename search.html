@@ -24,7 +24,7 @@
         <form class="hike-search">
           <div class="input-field">
             <input id="search-bar" class="addressInput hike-search-input" type="search" placeholder="enter an address or landmark and press enter" required>
-            <label for="search"><i class="material-icons">search</i></label>
+            <label for="search"><i id="search-icon" class="material-icons md-light">search</i></label>
           </div>
 
         </form>
@@ -118,14 +118,27 @@
 
     </main>
 
-    <!-- <footer class="page-footer green darken-1 white-text flow-text">
-      <h5 class="center"><a href="index.html" class="white-text">hike finder</a></h5>
-      <ul class="center">
-        <li><a href="index.html" class="white-text">home</a></li>
-        <li><a href="search.html" class="white-text">find a hike</a></li>
-        <li><a href="#" class="white-text">about</a></li>
+    <!-- <footer class="page-footer green darken-1 white-text">
+      <div class="row">
+        <div class="col s6">
+            <h5 class="left-align menu-item">
+              <a href="index.html" class="white-text">hike finder</a>
+            </h5>
+        </div>
+        <div class="col s6">
+            <h5 class="right-align menu-item" id="adv-search" style="display:inline">
+              advanced search
+            </h5>
+            <h5 class="right-align menu-item" id="your-hikes" style="display:inline">
+              your hikes
+            </h5>
 
-      </ul>
+            <ul>
+
+            </ul>
+
+        </div>
+      </div>
     </footer> -->
     <footer class="page-footer green darken-1 white-text">
       <div class="row">
@@ -135,9 +148,10 @@
             </h5>
         </div>
         <div class="col s6">
-            <h5 class="right-align menu-item" id="adv-search">
-              advanced search
-            </h5>
+            <ul class="right-align">
+              <li class="footer-item menu-item"><a href="#" id="adv-search" class="white-text">advanced search</a></li>
+              <li class="footer-item menu-item"><a href="yourhikes.html" id="your-hikes" class="white-text">your hikes</a></li>
+            </ul>
         </div>
       </div>
     </footer>

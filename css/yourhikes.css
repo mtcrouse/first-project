@@ -1,0 +1,46 @@
+/* This is the css file for the yourhikes.html page */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lora', serif;
+  font-size: 100%;
+}
+
+body {
+  background-image: url("../pictures/river2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 80%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /*height: 10%;*/
+}
+
+nav {
+  height: 10%;
+}
+
+.footer-item {
+  display: inline;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.menu-item {
+  margin-right: 5%;
+}
+
+.hikes-pop-out-div {
+  display: none;
+}
+
+#clear-saved-hikes {
+  margin-bottom: 150px;
+}

@@ -35,8 +35,13 @@ h5 {
 }
 
 .menu-item {
-  margin-right: 5%;
+  margin-right: 10%;
   margin-left: 5%;
+}
+
+.save-hike {
+  color: #039be5;
+  cursor: pointer;
 }
 
 #map {
@@ -53,6 +58,12 @@ h5 {
   cursor: pointer;
 }
 
+#your-hikes {
+  font-size: 1.1em;
+  line-height: 25px;
+  cursor: pointer;
+}
+
 #adv-search-heading {
   padding-top: 25px;
   padding-bottom: 50px;
@@ -60,4 +71,25 @@ h5 {
 
 #adv-search-button-div {
   margin-top: 50px;
+}
+
+#toast-container {
+  bottom: auto !important;
+  left: auto !important;
+  top: 10%;
+  right: 45%;
+}
+
+/* Make the placeholder text white */
+::-webkit-input-placeholder { /* Chrome */
+  color: white;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: white;
 }
