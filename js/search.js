@@ -195,7 +195,8 @@ $(document).ready(function() {
                         link: moreInfoLink,
                         city: hike['city'],
                         state: hike['state'],
-                        id: hike['unique_id']
+                        id: hike['unique_id'],
+                        thumbnail: hike['activities'][0]['thumbnail']
                       }
                     }
 

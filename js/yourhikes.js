@@ -29,7 +29,7 @@ $(document).ready(function() {
         $rowDiv = $('<div class="row">'),
         $col1Div = $('<div class="col s8 center-align">'),
         $col2Div = $('<div class="col s4 center-align">'),
-        $completeButton = $('<button>Mark as completed</button>');
+        $completeButton = $('<button class="btn green center">Mark as Hiked</button>');
 
     $headerDiv.attr('id', hikeID);
 
