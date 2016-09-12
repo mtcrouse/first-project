@@ -32,14 +32,14 @@ $(document).ready(() => {
     }
   };
 
-  const makeTrailsURL = function(trailsArray) {
+  const makeTrailsURL = function(newLat, newLng, newLimit, newTrail,
+                                newCity, newState, newRadius) {
     let counter = 0;
-    const trailsURL = 'https://trailapi-trailapi.p.mashape.com/?\
-                      q[activities_activity_type_name_eq]=hiking';
+    const trailsURL = 'https://trailapi-trailapi.p.mashape.com/?q[activities_activity_type_name_eq]=hiking';
     let moreURL = '';
     const argumentList = [];
 
-    for (let argument of trailsArray) {
+    for (let argument of arguments) {
       if (argument !== '') {
         // First argument is latitude
         if (counter === 0) {
@@ -233,8 +233,7 @@ $(document).ready(() => {
       markers.push(newMarker);
 
       // Gather info for a call to the trails API
-      const newTrailsURL = makeTrailsURL([newLat, newLng, newLimit, newTrail,
-                                        newCity, newState, newRadius]);
+      const newTrailsURL = makeTrailsURL(newLat, newLng, newLimit, newTrail, newCity, newState, newRadius);
 
       // Get the info from TrailsAPI
       $.ajax({
@@ -255,24 +254,19 @@ $(document).ready(() => {
               icon: 'tree.png'
             });
 
+            console.log(hike);
+
             // Replace <br> tags that show up in the info window text
-            const description = hike.activities[0].description
-                                .replace(/&lt;br \/&gt;<br \/>/g, '<br><br>');
+            const description = hike.activities[0].description.replace(/&lt;br \/&gt;<br \/>/g, '<br><br>');
 
             // Set a link that goes to the tripleblaze site
-            const moreInfoLink = `<a href=${hike.activities[0].url} \
-                                target='_blank'>Click here for more \
-                                information</a>`;
+            const moreInfoLink = `<a href=${hike.activities[0].url} target='_blank'>Click here for more information</a>`;
 
             // Set a link that will save the hike to local storage
-            const saveHike = '<p class="save-hike"> Click here to save \
-                              this hike to your hikes </p>';
+            const saveHike = '<p class="save-hike"> Click here to save this hike to your hikes </p>';
 
             // Populate info window
-            const infoWindowContent = `<div class="info-window-content">\
-                                      <h6>${hike.activities[0].name}</h6>\
-                                      <p>${description}</p>${moreInfoLink}\
-                                      ${saveHike}</div>`;
+            const infoWindowContent = `<div class="info-window-content"><h6>${hike.activities[0].name}</h6><p>${description}</p>${moreInfoLink}${saveHike}</div>`;
 
             markers.push(hikeMarker);
 
@@ -299,8 +293,7 @@ $(document).ready(() => {
                   }
                 };
 
-                const storedHikes = JSON.parse(localStorage
-                                              .getItem('savedHikes'));
+                const storedHikes = JSON.parse(localStorage.getItem('savedHikes'));
 
                 storedHikes[hikeCount] = hikeObj[hikeCount];
                 localStorage.setItem('savedHikeCount', Number(hikeCount) + 1);
