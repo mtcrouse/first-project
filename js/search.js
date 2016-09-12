@@ -3,36 +3,117 @@ $(document).ready(() => {
 
   // Initialize collapse button
   $('.button-collapse').sideNav({
-    menuWidth: 300, // Default is 240
-    edge: 'left', // Choose the horizontal origin
-    closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    menuWidth: 300,
+    edge: 'left',
+    closeOnClick: true
   });
+
+  // Initialize an empty array to keep track of all the markers
+  let markers = [];
+
+  // Function to display hike markers on map
+  const showHikes = function() {
+    const bounds = new google.maps.LatLngBounds();
+
+    // Extend the boundaries of the map for each marker and display the marker
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+      bounds.extend(markers[i].position);
+    }
+
+    // Set the bounds of the maps to encompass the markers
+    map.fitBounds(bounds);
+  };
+
+  // Hide hikes from the map so that new markers can be placed
+  const hideHikes = function() {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+  };
+
+  const makeTrailsURL = function(trailsArray) {
+    let counter = 0;
+    const trailsURL = 'https://trailapi-trailapi.p.mashape.com/?\
+                      q[activities_activity_type_name_eq]=hiking';
+    let moreURL = '';
+    const argumentList = [];
+
+    for (let argument of trailsArray) {
+      if (argument !== '') {
+        // First argument is latitude
+        if (counter === 0) {
+          argument = `lat=${argument}`;
+
+        // Second argument is longitude
+        } else if (counter === 1) {
+          argument = `lon=${argument}`;
+
+        // Third argument is limit
+        } else if (counter === 2) {
+          argument = `limit=${argument}`;
+
+        // Fourth argument is trail name
+        } else if (counter === 3) {
+          argument = `q[activities_activity_name_cont]=${argument}`;
+
+        // Fifth argument is city
+        } else if (counter === 4) {
+          argument = `q[city_cont]=${argument}`;
+
+        // Sixth argument is state
+        } else if (counter === 5) {
+          argument = `q[state_cont]=${argument}`;
+
+        // Seventh and final argument is radius in miles
+        } else if (counter === 6) {
+          argument = `radius=${argument}`;
+        }
+        argumentList.push(argument);
+      }
+      counter += 1;
+    }
+
+    // Add the arguments to the url
+    for (const arg of argumentList) {
+      moreURL += `&${arg}`;
+    }
+
+    return (trailsURL + moreURL);
+  };
 
   // Inititally hide the advanced search
   $('.button-collapse').sideNav('hide');
 
+  // Show advanced search slide-out
   $('#adv-search').click(() => {
     $('.button-collapse').sideNav('show');
   });
 
+  // Hide advanced search slide-out
   $('#adv-search-button').click(() => {
     if ($('#sideNavAddress').val() !== '') {
       $('.button-collapse').sideNav('hide');
     }
   });
 
-  $('#search-bar').blur(() => {
-    $('#search-bar').css('background-color', '#43a047');
-  });
-
+  // Turn search nav bar darker on focus
   $('#search-bar').focus(() => {
     $('#search-bar').css('background-color', '#1b5e20');
     $('#search-bar').css('color', 'white');
     $('#search-icon').css('color', 'white');
   });
 
+  // Turn search nav bar back to green on blur
+  $('#search-bar').blur(() => {
+    $('#search-bar').css('background-color', '#43a047');
+  });
+
+  // The following functions show toasts the first time a visitor
+  // comes to the page
   const searchToast = function() {
-    Materialize.toast('Enter an address, city, state, or landmark in the search bar at the top, and then press enter', 4000, 'rounded');
+    Materialize.toast('Enter an address, city, state, or landmark in the \
+            search bar at the top, and then press enter', 4000, 'rounded');
   };
 
   const delayedToast = function() {
@@ -40,7 +121,8 @@ $(document).ready(() => {
   };
 
   const searchToast2 = function() {
-    Materialize.toast('Click "Advanced Search" at the bottom right if you want more search options', 4000, 'rounded');
+    Materialize.toast('Click "Advanced Search" at the bottom right if you \
+                      want more search options', 4000, 'rounded');
   };
 
   const delayedToast2 = function() {
@@ -48,7 +130,8 @@ $(document).ready(() => {
   };
 
   const searchToast3 = function() {
-    Materialize.toast('After you search, click on the trees to explore and save different hikes', 4000, 'rounded');
+    Materialize.toast('After you search, click on the trees to explore and \
+                      save different hikes', 4000, 'rounded');
   };
 
   const delayedToast3 = function() {
@@ -56,13 +139,15 @@ $(document).ready(() => {
   };
 
   const searchToast4 = function() {
-    Materialize.toast('Click "Your Hikes" at the bottom right to see the hikes you\'ve picked out', 4000, 'rounded');
+    Materialize.toast('Click "Your Hikes" at the bottom right to see the \
+                      hikes you\'ve picked out', 4000, 'rounded');
   };
 
   const delayedToast4 = function() {
     window.setTimeout(searchToast4, 15500);
   };
 
+  // Only do this the first time the visitor comes to the page
   if (localStorage.getItem('newVisitor') === null) {
     localStorage.setItem('newVisitor', 'false');
 
@@ -72,16 +157,15 @@ $(document).ready(() => {
     delayedToast4();
   }
 
+  // Initialize the saved hikes object in local storage
   if (localStorage.getItem('savedHikes') === null) {
     localStorage.setItem('savedHikes', '{}');
   }
 
+  // Initialize a count of saved hikes in local storage
   if (localStorage.getItem('savedHikeCount') === null) {
     localStorage.setItem('savedHikeCount', '0');
   }
-
-  // Initialize an empty array to keep track of all the markers
-  let markers = [];
 
   // Event listener for when either search form is submitted
   $('.hike-search').submit((event) => {
@@ -100,8 +184,11 @@ $(document).ready(() => {
     let newState = '';
     let $inputText = '';
 
+    // Check if the input is in the main search bar
     if ($('#search-bar').val() !== '') {
       $inputText = $('#search-bar').val();
+
+    // If not, check the fields of the advanced search
     } else {
       if ($('#sideNavAddress').val() !== '') {
         $inputText = $('#sideNavAddress').val();
@@ -120,9 +207,11 @@ $(document).ready(() => {
     // Clear the search fields
     $('.hike-search-input').val('');
 
+    // Get the coordinates
     const searchText = $inputText.replace(/ /g, '+');
     const $xhr = $.getJSON(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchText}&key=AIzaSyCTjk4qkcAxIt7ObrFQZUDm2RJCrBz0hD8`);
 
+    // Place the initial marker
     $xhr.done((data) => {
       if ($xhr.status !== 200) {
         return;
@@ -143,7 +232,9 @@ $(document).ready(() => {
 
       markers.push(newMarker);
 
-      const newTrailsURL = makeTrailsURL(newLat, newLng, newLimit, newTrail, newCity, newState, newRadius);
+      // Gather info for a call to the trails API
+      const newTrailsURL = makeTrailsURL([newLat, newLng, newLimit, newTrail,
+                                        newCity, newState, newRadius]);
 
       // Get the info from TrailsAPI
       $.ajax({
@@ -152,9 +243,10 @@ $(document).ready(() => {
         headers: {
           'X-Mashape-Key': 'Agg1qbtLRcmshUri3sJD11mVxIiyp1JheEDjsnIMALfvefA4Ok'
         },
-        success: (data) => {
-          const hikes = data.places;
+        success: (data2) => {
+          const hikes = data2.places;
 
+          // Set a marker for each trailsAPI result
           for (const hike of hikes) {
             const hikeMarker = new google.maps.Marker({
               position: { lat: hike.lat, lng: hike.lon },
@@ -162,14 +254,29 @@ $(document).ready(() => {
               animation: google.maps.Animation.DROP,
               icon: 'tree.png'
             });
-            const description = hike.activities[0].description.replace(/&lt;br \/&gt;<br \/>/g, '<br><br>');
+
+            // Replace <br> tags that show up in the info window text
+            const description = hike.activities[0].description
+                                .replace(/&lt;br \/&gt;<br \/>/g, '<br><br>');
+
+            // Set a link that goes to the tripleblaze site
             const moreInfoLink = `<a href=${hike.activities[0].url} \
-                                target='_blank'>Click here for more information</a>`;
-            const saveHike = '<p class="save-hike"> Click here to save this hike to your hikes </p>';
-            const infoWindowContent = `<div class="info-window-content"><h6>${hike.activities[0].name}</h6><p>${description}</p>${moreInfoLink}${saveHike}</div>`;
+                                target='_blank'>Click here for more \
+                                information</a>`;
+
+            // Set a link that will save the hike to local storage
+            const saveHike = '<p class="save-hike"> Click here to save \
+                              this hike to your hikes </p>';
+
+            // Populate info window
+            const infoWindowContent = `<div class="info-window-content">\
+                                      <h6>${hike.activities[0].name}</h6>\
+                                      <p>${description}</p>${moreInfoLink}\
+                                      ${saveHike}</div>`;
 
             markers.push(hikeMarker);
 
+            // Add event listener to each marker
             hikeMarker.addListener('click', () => {
               hikeInfo.setContent(infoWindowContent);
               hikeInfo.open(map, hikeMarker);
@@ -192,9 +299,10 @@ $(document).ready(() => {
                   }
                 };
 
-                const storedHikes = JSON.parse(localStorage.getItem('savedHikes'));
-                storedHikes[hikeCount] = hikeObj[hikeCount];
+                const storedHikes = JSON.parse(localStorage
+                                              .getItem('savedHikes'));
 
+                storedHikes[hikeCount] = hikeObj[hikeCount];
                 localStorage.setItem('savedHikeCount', Number(hikeCount) + 1);
 
                 const jsonHike = JSON.stringify(storedHikes);
@@ -203,60 +311,11 @@ $(document).ready(() => {
               });
             });
           }
+
+          // Display the markers on the map
           showHikes();
         }
       });
     });
   });
-
-  const makeTrailsURL = function(latitude, longitude, limit, trailName, city, state, radius) {
-    let counter = 0;
-    const trailsURL = 'https://trailapi-trailapi.p.mashape.com/?q[activities_activity_type_name_eq]=hiking';
-    let moreURL = '';
-    const argumentList = [];
-
-    for (let argument of arguments) {
-      if (argument !== '') {
-        if (counter === 0) {
-          argument = `lat=${argument}`;
-        } else if (counter === 1) {
-          argument = `lon=${argument}`;
-        } else if (counter === 2) {
-          argument = `limit=${argument}`;
-        } else if (counter === 3) {
-          argument = `q[activities_activity_name_cont]=${argument}`;
-        } else if (counter === 4) {
-          argument = `q[city_cont]=${argument}`;
-        } else if (counter === 5) {
-          argument = `q[state_cont]=${argument}`;
-        } else if (counter === 6) {
-          argument = `radius=${argument}`;
-        }
-        argumentList.push(argument);
-      }
-      counter += 1;
-    }
-    for (const arg of argumentList) {
-      moreURL += `&${arg}`;
-    }
-
-    return (trailsURL + moreURL);
-  };
-
-  const showHikes = function() {
-    const bounds = new google.maps.LatLngBounds();
-
-    // Extend the boundaries of the map for each marker and display the marker
-    for (let i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
-      bounds.extend(markers[i].position);
-    }
-    map.fitBounds(bounds);
-  };
-
-  const hideHikes = function() {
-    for (let i = 0; i < markers.length; i++) {
-      markers[i].setMap(null);
-    }
-  };
 });
