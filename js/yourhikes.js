@@ -1,5 +1,3 @@
-// This is the js file for yourhikes.html
-
 $(document).ready(() => {
   'use strict';
 

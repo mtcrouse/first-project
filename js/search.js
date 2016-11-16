@@ -204,7 +204,6 @@ $(document).ready(() => {
       }
     }
 
-    // Clear the search fields
     $('.hike-search-input').val('');
 
     // Get the coordinates
@@ -305,7 +304,6 @@ $(document).ready(() => {
             });
           }
 
-          // Display the markers on the map
           showHikes();
         }
       });
