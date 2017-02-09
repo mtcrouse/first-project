@@ -11,7 +11,6 @@ $(document).ready(() => {
   // Initialize an empty array to keep track of all the markers
   let markers = [];
 
-  // Function to display hike markers on map
   const showHikes = function() {
     const bounds = new google.maps.LatLngBounds();
 
@@ -25,7 +24,6 @@ $(document).ready(() => {
     map.fitBounds(bounds);
   };
 
-  // Hide hikes from the map so that new markers can be placed
   const hideHikes = function() {
     for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
@@ -41,31 +39,24 @@ $(document).ready(() => {
 
     for (let argument of arguments) {
       if (argument !== '') {
-        // First argument is latitude
         if (counter === 0) {
           argument = `lat=${argument}`;
 
-        // Second argument is longitude
         } else if (counter === 1) {
           argument = `lon=${argument}`;
 
-        // Third argument is limit
         } else if (counter === 2) {
           argument = `limit=${argument}`;
 
-        // Fourth argument is trail name
         } else if (counter === 3) {
           argument = `q[activities_activity_name_cont]=${argument}`;
 
-        // Fifth argument is city
         } else if (counter === 4) {
           argument = `q[city_cont]=${argument}`;
 
-        // Sixth argument is state
         } else if (counter === 5) {
           argument = `q[state_cont]=${argument}`;
 
-        // Seventh and final argument is radius in miles
         } else if (counter === 6) {
           argument = `radius=${argument}`;
         }
@@ -74,7 +65,6 @@ $(document).ready(() => {
       counter += 1;
     }
 
-    // Add the arguments to the url
     for (const arg of argumentList) {
       moreURL += `&${arg}`;
     }
@@ -82,35 +72,28 @@ $(document).ready(() => {
     return (trailsURL + moreURL);
   };
 
-  // Inititally hide the advanced search
   $('.button-collapse').sideNav('hide');
 
-  // Show advanced search slide-out
   $('#adv-search').click(() => {
     $('.button-collapse').sideNav('show');
   });
 
-  // Hide advanced search slide-out
   $('#adv-search-button').click(() => {
     if ($('#sideNavAddress').val() !== '') {
       $('.button-collapse').sideNav('hide');
     }
   });
 
-  // Turn search nav bar darker on focus
   $('#search-bar').focus(() => {
     $('#search-bar').css('background-color', '#1b5e20');
     $('#search-bar').css('color', 'white');
     $('#search-icon').css('color', 'white');
   });
 
-  // Turn search nav bar back to green on blur
   $('#search-bar').blur(() => {
     $('#search-bar').css('background-color', '#43a047');
   });
 
-  // The following functions show toasts the first time a visitor
-  // comes to the page
   const searchToast = function() {
     Materialize.toast('Enter an address, city, state, or landmark in the \
             search bar at the top, and then press enter', 4000, 'rounded');
@@ -147,7 +130,6 @@ $(document).ready(() => {
     window.setTimeout(searchToast4, 15500);
   };
 
-  // Only do this the first time the visitor comes to the page
   if (localStorage.getItem('newVisitor') === null) {
     localStorage.setItem('newVisitor', 'false');
 
@@ -188,7 +170,6 @@ $(document).ready(() => {
     if ($('#search-bar').val() !== '') {
       $inputText = $('#search-bar').val();
 
-    // If not, check the fields of the advanced search
     } else {
       if ($('#sideNavAddress').val() !== '') {
         $inputText = $('#sideNavAddress').val();
@@ -231,10 +212,8 @@ $(document).ready(() => {
 
       markers.push(newMarker);
 
-      // Gather info for a call to the trails API
       const newTrailsURL = makeTrailsURL(newLat, newLng, newLimit, newTrail, newCity, newState, newRadius);
 
-      // Get the info from TrailsAPI
       $.ajax({
         dataType: 'json',
         url: newTrailsURL,
@@ -264,7 +243,6 @@ $(document).ready(() => {
             // Set a link that will save the hike to local storage
             const saveHike = '<p class="save-hike"> Click here to save this hike to your hikes </p>';
 
-            // Populate info window
             const infoWindowContent = `<div class="info-window-content"><h6>${hike.activities[0].name}</h6><p>${description}</p>${moreInfoLink}${saveHike}</div>`;
 
             markers.push(hikeMarker);

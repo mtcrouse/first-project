@@ -1,4 +1,4 @@
-/* This is the css file for the yourhikes.html page */
+/* CSS file for the yourhikes.html page */
 
 html, body {
   height: 100%;
@@ -26,20 +26,6 @@ nav {
   height: 10%;
 }
 
-.footer-item {
-  display: inline;
-  padding-right: 20px;
-  padding-left: 20px;
-}
-
-.menu-item {
-  margin-right: 5%;
-}
-
-.hikes-pop-out-div {
-  display: none;
-}
-
 .checkmark {
   color: white;
 }
@@ -47,6 +33,20 @@ nav {
 .completed {
   background-color: #43a047;
   color: white;
+}
+
+.footer-item {
+  display: inline;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.hikes-pop-out-div {
+  display: none;
+}
+
+.menu-item {
+  margin-right: 5%;
 }
 
 #clear-saved-hikes {

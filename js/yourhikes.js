@@ -24,7 +24,6 @@ $(document).ready(() => {
     $('body').css('background-image', 'none');
   }
 
-  // Make pop-out menu of saved hikes
   const makePopOut = function(hikeName, hikeDescription, hikeURL, hikeID) {
     const $li = $('<li>');
     const $headerDiv = $('<div class="collapsible-header center-align">');
@@ -101,7 +100,6 @@ $(document).ready(() => {
                                                     .css('display', 'none');
   }
 
-  // Clear saved hikes from local storage
   $('#clear-saved-hikes').click(() => {
     $('#no-hikes-message').fadeIn();
     $('.hikes-pop-out-div').fadeOut();

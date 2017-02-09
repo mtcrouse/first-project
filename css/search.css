@@ -48,6 +48,21 @@ h5 {
   cursor: pointer;
 }
 
+#adv-search {
+  font-size: 1.1em;
+  line-height: 25px;
+  cursor: pointer;
+}
+
+#adv-search-button-div {
+  margin-top: 50px;
+}
+
+#adv-search-heading {
+  padding-top: 25px;
+  padding-bottom: 50px;
+}
+
 #map {
   height: 80%;
   width:100%;
@@ -56,32 +71,17 @@ h5 {
   position: absolute;
 }
 
-#adv-search {
-  font-size: 1.1em;
-  line-height: 25px;
-  cursor: pointer;
+#toast-container {
+  bottom: auto !important;
+  left: 5%;
+  top: auto !important;
+  right: auto !important;
 }
 
 #your-hikes {
   font-size: 1.1em;
   line-height: 25px;
   cursor: pointer;
-}
-
-#adv-search-heading {
-  padding-top: 25px;
-  padding-bottom: 50px;
-}
-
-#adv-search-button-div {
-  margin-top: 50px;
-}
-
-#toast-container {
-  bottom: auto !important;
-  left: 5%;
-  top: auto !important;
-  right: auto !important;
 }
 
 /* Make the placeholder text white */
