@@ -1,3 +1,5 @@
+/* eslint-disable max-len, max-statements, no-undef */
+
 $(document).ready(() => {
   'use strict';
 
@@ -41,22 +43,16 @@ $(document).ready(() => {
       if (argument !== '') {
         if (counter === 0) {
           argument = `lat=${argument}`;
-
         } else if (counter === 1) {
           argument = `lon=${argument}`;
-
         } else if (counter === 2) {
           argument = `limit=${argument}`;
-
         } else if (counter === 3) {
           argument = `q[activities_activity_name_cont]=${argument}`;
-
         } else if (counter === 4) {
           argument = `q[city_cont]=${argument}`;
-
         } else if (counter === 5) {
           argument = `q[state_cont]=${argument}`;
-
         } else if (counter === 6) {
           argument = `radius=${argument}`;
         }
@@ -69,7 +65,7 @@ $(document).ready(() => {
       moreURL += `&${arg}`;
     }
 
-    return (trailsURL + moreURL);
+    return trailsURL + moreURL;
   };
 
   $('.button-collapse').sideNav('hide');
@@ -95,8 +91,7 @@ $(document).ready(() => {
   });
 
   const searchToast = function() {
-    Materialize.toast('Enter an address, city, state, or landmark in the \
-            search bar at the top, and then press enter', 4000, 'rounded');
+    Materialize.toast('Enter an address, city, state, or landmark in the search bar at the top, and then press enter', 4000, 'rounded');
   };
 
   const delayedToast = function() {
@@ -104,8 +99,7 @@ $(document).ready(() => {
   };
 
   const searchToast2 = function() {
-    Materialize.toast('Click "Advanced Search" at the bottom right if you \
-                      want more search options', 4000, 'rounded');
+    Materialize.toast('Click "Advanced Search" at the bottom right if you want more search options', 4000, 'rounded');
   };
 
   const delayedToast2 = function() {
@@ -113,8 +107,7 @@ $(document).ready(() => {
   };
 
   const searchToast3 = function() {
-    Materialize.toast('After you search, click on the trees to explore and \
-                      save different hikes', 4000, 'rounded');
+    Materialize.toast('After you search, click on the trees to explore and save different hikes', 4000, 'rounded');
   };
 
   const delayedToast3 = function() {
@@ -122,8 +115,7 @@ $(document).ready(() => {
   };
 
   const searchToast4 = function() {
-    Materialize.toast('Click "Your Hikes" at the bottom right to see the \
-                      hikes you\'ve picked out', 4000, 'rounded');
+    Materialize.toast('Click "Your Hikes" at the bottom right to see the hikes you\'ve picked out', 4000, 'rounded');
   };
 
   const delayedToast4 = function() {
@@ -159,17 +151,16 @@ $(document).ready(() => {
 
     markers = [];
 
-    let newLimit = '10';
-    let newRadius = '25';
     const newTrail = '';
     const newCity = '';
+    let newLimit = '10';
+    let newRadius = '25';
     let newState = '';
     let $inputText = '';
 
     // Check if the input is in the main search bar
     if ($('#search-bar').val() !== '') {
       $inputText = $('#search-bar').val();
-
     } else {
       if ($('#sideNavAddress').val() !== '') {
         $inputText = $('#sideNavAddress').val();
@@ -201,8 +192,8 @@ $(document).ready(() => {
       const newLng = (data.results[0].geometry.location.lng);
 
       const newMarker = new google.maps.Marker({
+        map,
         position: { lat: newLat, lng: newLng },
-        map: map,
         title: $inputText
       });
 
@@ -231,8 +222,6 @@ $(document).ready(() => {
               animation: google.maps.Animation.DROP,
               icon: 'tree.png'
             });
-
-            console.log(hike);
 
             // Replace <br> tags that show up in the info window text
             const description = hike.activities[0].description.replace(/&lt;br \/&gt;<br \/>/g, '<br><br>');
