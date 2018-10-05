@@ -1,5 +1,3 @@
-/* eslint-disable max-len, max-statements, no-undef */
-
 $(document).ready(() => {
   'use strict';
 
@@ -27,13 +25,12 @@ $(document).ready(() => {
   };
 
   const hideHikes = function() {
-    for (let i = 0; i < markers.length; i++) {
+    for (let i = 0; i < markers.length; i += 1) {
       markers[i].setMap(null);
     }
   };
 
-  const makeTrailsURL = function(newLat, newLng, newLimit, newTrail,
-                                newCity, newState, newRadius) {
+  const makeTrailsURL = function(newLat, newLng, newLimit, newTrail, newCity, newState, newRadius) {
     let counter = 0;
     const trailsURL = 'https://trailapi-trailapi.p.mashape.com/?q[activities_activity_type_name_eq]=hiking';
     let moreURL = '';
@@ -220,7 +217,7 @@ $(document).ready(() => {
               position: { lat: hike.lat, lng: hike.lon },
               title: hike.name,
               animation: google.maps.Animation.DROP,
-              icon: 'tree.png'
+              icon: 'tree.png',
             });
 
             // Replace <br> tags that show up in the info window text
@@ -255,8 +252,8 @@ $(document).ready(() => {
                     link: moreInfoLink,
                     city: hike.city,
                     state: hike.state,
-                    id: hike.unique_id
-                  }
+                    id: hike.unique_id,
+                  },
                 };
 
                 const storedHikes = JSON.parse(localStorage.getItem('savedHikes'));

@@ -1,11 +1,9 @@
-/* eslint-disable max-len */
-
 $(document).ready(() => {
   'use strict';
 
   // Initialize pop-out menu
   $('.collapsible').collapsible({
-    accordion: true
+    accordion: true,
   });
 
   // Check if there are saved hikes and set local storage accordingly
@@ -44,8 +42,8 @@ $(document).ready(() => {
       const tempCompHikes = JSON.parse(localStorage.getItem('completedHikes'));
       const newCompHike = {
         [numCompHikes]: {
-          id: $hikeHeader.attr('id')
-        }
+          id: $hikeHeader.attr('id'),
+        },
       };
 
       tempCompHikes[numCompHikes] = newCompHike[numCompHikes];

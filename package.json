@@ -1,0 +1,26 @@
+{
+  "name": "hike-finder",
+  "version": "1.0.0",
+  "description": "Hike Finder is a website designed to find nearby hikes by returning all hikes within a certain radius of a city, state, address, or landmark. Hike Finder also provides an easy way to keep track of past hikes and hikes you'd like to complete in the future.",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtcrouse/hike-finder.git"
+  },
+  "author": "Metta Crouse <mettacrouse@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtcrouse/hike-finder/issues"
+  },
+  "homepage": "https://github.com/mtcrouse/hike-finder#readme",
+  "devDependencies": {
+    "eslint": "^3.16.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0"
+  }
+}
